@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharingIsCaring.Console", "SharingIsCaring.Console\SharingIsCaring.Console.csproj", "{4281445B-6744-42F6-9BE9-F929C3272561}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharingIsCaring.Core", "SharingIsCaring.Core\SharingIsCaring.Core.csproj", "{3015B07E-3327-4831-B606-7830A05B740B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4281445B-6744-42F6-9BE9-F929C3272561}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4281445B-6744-42F6-9BE9-F929C3272561}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4281445B-6744-42F6-9BE9-F929C3272561}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4281445B-6744-42F6-9BE9-F929C3272561}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3015B07E-3327-4831-B606-7830A05B740B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3015B07E-3327-4831-B606-7830A05B740B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3015B07E-3327-4831-B606-7830A05B740B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3015B07E-3327-4831-B606-7830A05B740B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
