@@ -3,16 +3,15 @@ name: "Build .Net"
 on:
   push:
     branches: [ "main" ]
-    paths: [ "src/dotnet" ]
   pull_request:
     branches: [ "main" ]
-    paths: [ "src/dotnet" ]
 
 jobs:
   build-test-job:
     runs-on: ubuntu-latest
-    env:
-      workdir: "./src/dotnet"
+    defaults:
+      run:
+        working-directory: ./src/dotnet
 
     steps:
     - uses: actions/checkout@v3
@@ -23,9 +22,7 @@ jobs:
         dotnet-version: 8.0.x
 
     - name: Restore dependencies
-      working-directory: ${{env.workdir}}
       run: dotnet restore
 
     - name: Build
-      working-directory: ${{env.workdir}}
       run: dotnet build --no-restore
