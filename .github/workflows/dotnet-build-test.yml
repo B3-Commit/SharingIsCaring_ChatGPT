@@ -4,7 +4,7 @@ on:
   push:
     branches: [ "main" ]
     paths: [ "src/dotnet" ]
-  pull_requests:
+  pull_request:
     branches: [ "main" ]
     paths: [ "src/dotnet" ]
 
