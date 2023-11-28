@@ -75,9 +75,6 @@ public class OpenAIClientService : IOpenAIClientService
         _logger.LogDebug($"Loaded {options.Messages.Count} messages to be sent");
         _logger.LogInformation("Sending query to OpenAI service");
 
-        _logger.LogInformation($"Using deployment: {_serviceOptions.Deployments.FirstOrDefault().Name}");
-        _logger.LogInformation($"Using modelname: {_serviceOptions.Deployments.FirstOrDefault().ModelName}");
-
         Response<ChatCompletions> response = await _openAIClient
             .GetChatCompletionsAsync(
                 chatCompletionsOptions: options,
