@@ -2,14 +2,14 @@ namespace SharingIsCaring.Core.Models.Search;
 
 public class SearchResponse
 {
-    public bool SCopeRemoved { get; set; } = false;
+    public bool ScopeRemoved { get; set; } = false;
     public int Count { get; set; }
     public string NextLink { get; set; } = null!;
     public string SrchEng { get; set; } = null!;
     public bool TermHasSynonyms { get; set; }
 
     public IEnumerable<Facet> Facets { get; set; }
-        = Enumerable.Empty<Facet>();    
+        = Enumerable.Empty<Facet>();
 
     public IEnumerable<Result> Results { get; set; }
         = Enumerable.Empty<Result>();
@@ -30,7 +30,7 @@ public class SearchResponse
             public string Value { get; set; } = null!;
         }
 
-        public class Product 
+        public class Product
         {
             public string DisplayName { get; set; } = null!;
             public int Count { get; set; }
@@ -51,7 +51,7 @@ public class SearchResponse
         public string Category { get; set; } = null!;
 
         // TODO: Implement breadcrumbs
-        
+
         public DisplayUrlValue DisplayUrl { get; set; } = null!;
         public IEnumerable<DescriptionValue> Descriptions { get; set; }
             = Enumerable.Empty<DescriptionValue>();
@@ -59,21 +59,21 @@ public class SearchResponse
         public class DisplayUrlValue
         {
             public string Content { get; set; } = null!;
-            public IEnumerable<HighLight> HitHighLights { get; set; }
+            public IEnumerable<HighLight> HitHighlights { get; set; }
                 = Enumerable.Empty<HighLight>();
         }
 
         public class DescriptionValue
         {
             public string Content { get; set; } = null!;
-            public IEnumerable<HighLight> HitHighLights { get; set; }
+            public IEnumerable<HighLight> HitHighlights { get; set; }
                 = Enumerable.Empty<HighLight>();
         }
 
         public class HighLight
         {
             public int Start { get; set; }
-            public int Lenght { get; set; }
+            public int Length { get; set; }
         }
     }
 }

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharingIsCaring.Console", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharingIsCaring.Core", "SharingIsCaring.Core\SharingIsCaring.Core.csproj", "{3015B07E-3327-4831-B606-7830A05B740B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharingIsCaring.ChatGPTAPI", "SharingIsCaring.ChatGPTAPI\SharingIsCaring.ChatGPTAPI.csproj", "{559966BE-34DC-429E-96CF-2D9B2FE7C1DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{3015B07E-3327-4831-B606-7830A05B740B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3015B07E-3327-4831-B606-7830A05B740B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3015B07E-3327-4831-B606-7830A05B740B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{559966BE-34DC-429E-96CF-2D9B2FE7C1DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{559966BE-34DC-429E-96CF-2D9B2FE7C1DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{559966BE-34DC-429E-96CF-2D9B2FE7C1DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{559966BE-34DC-429E-96CF-2D9B2FE7C1DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

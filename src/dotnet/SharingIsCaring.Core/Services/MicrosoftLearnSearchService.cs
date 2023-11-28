@@ -86,10 +86,21 @@ public class MicrosoftLearnSearchService(
         queryString["expandScope"] = searchRequest.ExpandScope.ToString();
         queryString["partnerId"] = searchRequest.PartnerId;
 
-        return await httpClient
-            .GetFromJsonAsync<SearchResponse>(
+        HttpResponseMessage response = await httpClient
+            .GetAsync(
                 requestUri: $"api/search?{queryString}",
-                cancellationToken: searchRequest.CancellationToken)
-            ?? null!;
+                cancellationToken: searchRequest.CancellationToken);
+
+        if (response.IsSuccessStatusCode)
+        {
+            return await response.Content.ReadFromJsonAsync<SearchResponse>() ?? null!;
+        }
+        else
+        {
+            string errMessage = await response.Content.ReadAsStringAsync();
+            logger.LogError($"Unable to parse JSON response: {errMessage}");
+
+            throw new Exception(errMessage);
+        }
     }
 }
