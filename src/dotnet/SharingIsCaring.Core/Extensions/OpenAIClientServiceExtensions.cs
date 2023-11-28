@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 using SharingIsCaring.Core.Services;
@@ -25,6 +26,29 @@ public static class OpenAIClientServiceExtensions
                 {
                     p.ServiceUri = serviceUri;
                     p.ServiceKey = serviceKey;
+                    p.Deployments = deployments;
+                });
+        });
+
+        return builder;
+    }
+
+    public static HostApplicationBuilder ConfigureOpenAIServices(
+        this HostApplicationBuilder builder,
+        string serviceUri,
+        string serviceKey,
+        IEnumerable<OpenAIClientServiceOptions.Deployment> deployments)
+    {
+        builder.Services.AddSingleton<IOpenAIClientService>(provider =>
+        {
+            var logger = provider.GetRequiredService<ILogger<OpenAIClientService>>();
+
+            return new OpenAIClientService(
+                logger: logger,
+                options: p =>
+                {
+                    p.ServiceKey = serviceKey;
+                    p.ServiceUri = serviceUri;
                     p.Deployments = deployments;
                 });
         });

@@ -9,6 +9,10 @@ namespace SharingIsCaring.Core.Services;
 
 public interface IOpenAIClientService
 {
+    Task<string> GetChatCompletionsAsync(
+        ChatCompletionInput input,
+        ChatCompletionsOptions? options = null,
+        CancellationToken cancellationToken = default);
 }
 
 public class OpenAIClientService : IOpenAIClientService
@@ -37,6 +41,8 @@ public class OpenAIClientService : IOpenAIClientService
         _serviceOptions = new();
         options(_serviceOptions);
 
+        Console.WriteLine($"Current uri: {_serviceOptions.ServiceUri}");
+
         _openAIClient = new OpenAIClient(
             endpoint: new Uri(_serviceOptions.ServiceUri),
             keyCredential: new AzureKeyCredential(_serviceOptions.ServiceKey));
@@ -44,13 +50,17 @@ public class OpenAIClientService : IOpenAIClientService
 
     public async Task<string> GetChatCompletionsAsync(
         ChatCompletionInput input,
-        ChatCompletionsOptions options = null!,
+        ChatCompletionsOptions? options = null,
         CancellationToken cancellationToken = default)
     {
         _logger.BeginScope($"[{nameof(OpenAIClientService)}]");
+        _logger.LogDebug("Loading configurations");
 
         if (options is null)
+        {
+            _logger.LogWarning("Load default configuration");
             options = GetDefaultOptions();
+        }
 
         // Add assistant message if missing, otherwise skip it
         if (options.Messages.Any(e => e.Role != ChatRole.Assistant))
@@ -62,7 +72,11 @@ public class OpenAIClientService : IOpenAIClientService
             options.Messages.Add(new ChatMessage(message.role, message.message));
         }
 
-        _logger.LogTrace(message: "Sending query to OpenAI service");
+        _logger.LogDebug($"Loaded {options.Messages.Count} messages to be sent");
+        _logger.LogInformation("Sending query to OpenAI service");
+
+        _logger.LogInformation($"Using deployment: {_serviceOptions.Deployments.FirstOrDefault().Name}");
+        _logger.LogInformation($"Using modelname: {_serviceOptions.Deployments.FirstOrDefault().ModelName}");
 
         Response<ChatCompletions> response = await _openAIClient
             .GetChatCompletionsAsync(
@@ -71,7 +85,11 @@ public class OpenAIClientService : IOpenAIClientService
 
         ChatCompletions completions = response.Value;
 
-        return completions.Choices.Any()
+        var sortedResult = completions.Choices.OrderBy(e => e.Index);
+
+        Console.WriteLine($"[RESULT] - {sortedResult?.LastOrDefault()?.Message.Content}");
+
+        return completions.Choices.Count > 0
             ? completions.Choices[0].Message.Content
             : string.Empty;
     }
@@ -84,6 +102,7 @@ public class OpenAIClientService : IOpenAIClientService
             NucleusSamplingFactor = (float)0.95,
             FrequencyPenalty = 0,
             PresencePenalty = 0,
+            MaxTokens = 2000,
             DeploymentName = string.IsNullOrWhiteSpace(deployment)
                 ? _serviceOptions.Deployments.FirstOrDefault()?.Name
                 : _serviceOptions.Deployments.FirstOrDefault(e => e.Equals(deployment))?.Name
